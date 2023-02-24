@@ -1,0 +1,17 @@
+﻿
+<input @bind="_search" placeholder="Search..." type="text" @bind:after="SearchChange" />
+<button class="btn btn-danger" @onclick="SearchChange">Search</button>
+
+@code {
+    [Parameter]
+    public Action<string?> OnSearch { get; set; }
+
+    public string? _search { get; set; }
+
+    private void SearchChange()
+    {
+        OnSearch.Invoke(_search);
+    }
+
+}
+

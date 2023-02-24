@@ -1,0 +1,67 @@
+﻿@page "/book-add"
+@using FormationBlazor.Client.Shared;
+@inject HttpClient Http;
+@inject NavigationManager NavigationManager;
+
+<h3>BookAdd</h3>
+
+<EditForm EditContext="_editContext" OnValidSubmit="HandleSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="mb-3">
+        <label for="Name" class="form-label">Name</label>
+        <InputText id="Name" class="form-control" @bind-Value="_book.Name" />
+
+    </div>
+
+
+    <div class="mb-3">
+        <label for="Author" class="form-label">Author</label>
+        <InputText id="Author" class="form-control" @bind-Value="_book.Author" />
+
+    </div>
+    <div class="mb-3">
+        <label for="Date" class="form-label">Date</label>
+        <InputDate id="Date" class="form-control" @bind-Value="_book.Date" />
+
+    </div>
+    <div class="mb-3">
+        <label for="Link" class="form-label">Link</label>
+        <InputText id="Link" class="form-control" @bind-Value="_book.link" />
+
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+
+
+</EditForm>
+
+@code {
+    Book _book = new Book();
+
+    private EditContext? _editContext;
+    private ValidationMessageStore? _messageStore;
+
+    protected override void OnInitialized()
+    {
+        _editContext = new(_book);
+        //_editContext.OnValidationRequested += HandleValidationRequest;
+        _editContext.OnValidationRequested += HandleValidationRequest;
+    }
+    private void HandleValidationRequest(object? sender, ValidationRequestedEventArgs e)
+    {
+        _messageStore.Clear();
+
+        if (string.IsNullOrEmpty(_book.link))
+        {
+            _messageStore?.Add(() => _book.link, "Link is Required");
+        }
+
+    }
+
+    private async Task HandleSubmit()
+    {
+        await Http.PostAsJsonAsync("/api/Books", _book);
+        NavigationManager.NavigateTo("/FeretchData");
+    }
+
+}

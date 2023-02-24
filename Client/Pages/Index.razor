@@ -1,0 +1,19 @@
+﻿@page "/"
+@inject NavigationManager NavigationManager
+
+
+<PageTitle>Index</PageTitle>
+
+<h3>Bienvenue à la formation Blazor</h3>
+
+<button class="btn btn-dark" onclick="@Navigate">Navigation</button>
+
+<img src="images/Sommaire.png" alt="Sommaire"/>
+
+@code {
+    private void Navigate()
+    {
+        NavigationManager.NavigateTo("/navigation-manager");
+    }
+
+}

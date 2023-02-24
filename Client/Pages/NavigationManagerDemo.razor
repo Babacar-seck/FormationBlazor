@@ -1,0 +1,13 @@
+﻿@page "/navigation-manager"
+@inject NavigationManager NavigationManager
+
+<h3>Navigation Manager Démo</h3>
+
+<p>NavigationManager.BaseUri => @NavigationManager.BaseUri</p>
+<p>NavigationManager.Uri => @NavigationManager.Uri</p>
+
+<p>NavigationManager.ToBaseRelativePath => @NavigationManager.ToBaseRelativePath(NavigationManager.Uri)</p>
+
+@code {
+
+}

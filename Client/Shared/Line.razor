@@ -1,0 +1,36 @@
+﻿
+@inject NavigationManager NavigationManager;
+
+<tr>
+    <td> @Date.ToShortDateString()</td>
+    <td> @Name</td>
+    <td> @Author</td>
+    <td> <a class="btn btn-dark" href="@Link">Open</a></td>
+    <td> <button class="btn btn-success" @onclick="NavigateDetail">Detail</button></td>
+</tr>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+    [Parameter]
+    public DateTime Date { get; set; }
+    [Parameter]
+    public string Name { get; set; }
+    [Parameter]
+    public string Author { get; set; }
+    [Parameter]
+    public string Link { get; set; }
+
+    //public void NavigateDetail()
+    //{
+    //}
+    private const string url = "book-detail";
+
+    public void NavigateDetail()
+    {
+    //   NavigationManager.NavigateTo($"/book-detail/{Id}");
+        NavigationManager.NavigateTo($"/{url}/{Id}?name={Name}");
+    }
+
+
+}

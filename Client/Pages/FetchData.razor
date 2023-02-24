@@ -1,0 +1,36 @@
+﻿@page "/fetchdata"
+@inject NavigationManager NavigationManager
+<PageTitle>Book Management</PageTitle>
+
+<h1>Book Management</h1>
+
+<Search OnSearch="SearchChange"></Search>
+<button class="btn btn-primary" @onclick="AddBook"> New</button>
+
+
+@if (_isLoading)
+{
+    <p>Loading...</p>
+
+}
+else
+{
+    <table class="table">
+        <thead>
+        <th>Date</th>
+        <th>Name</th>
+        <th>Author</th>
+        <th>Link</th>
+        <th>Detail</th>
+        </thead>
+        <tbody>
+
+            @foreach (var item in currentBook)
+            {
+                <Line Date="@item.Date" Name="@item.Name" Author="@item.Author" Link="@item.link" ></Line>
+            }
+
+        </tbody>
+    </table>
+}
+
